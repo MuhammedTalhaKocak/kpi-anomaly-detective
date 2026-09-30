@@ -1,5 +1,5 @@
 data/*/*
 !data/*/.gitkeep
 .env
-__py__cache/
+__pycache__/
 .ipynb_checkpoints/
