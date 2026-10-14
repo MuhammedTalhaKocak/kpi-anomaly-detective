@@ -7,9 +7,11 @@ from src.detection.detection import detect_anomalies
 def main():
     with open("configs/config.yaml") as f:
         config = yaml.safe_load(f)
-
-    orders = load_orders(config)
-    daily = build_daily_revenue(orders)
+    with open("configs/metrics.yaml") as f:
+        metrics = yaml.safe_load(f)
+    revenue_def = metrics["revenue"]
+    orders = load_orders(config, revenue_def)
+    daily = build_daily_revenue(orders, revenue_def)
     daily.to_csv(path_or_buf=config["paths"]["daily_revenue"], index=False)
     window = config["detection"]["rolling_window"]
     threshold = config["detection"]["z_threshold"]

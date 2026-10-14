@@ -11,5 +11,3 @@ paths:
   order_items: data/raw/olist_order_items_dataset.csv
   daily_revenue: data/processed/daily_revenue.csv
   detection_results: data/processed/detection_results.csv
-
-valid_statuses: [delivered, shipped, invoiced, processing, approved]

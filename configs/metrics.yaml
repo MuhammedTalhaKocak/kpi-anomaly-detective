@@ -1,0 +1,16 @@
+revenue:
+  display_name: Günlük Gelir
+  description: Geçerli statüdeki siparişlerin ürün bedellerinin günlük toplamı.
+  source_table: order_items # orders ile order_id üzerinden birleştirilir
+  value_column: price 
+  excluded_columns: [freight_value]
+  aggregation: sum
+  date_column: order_purchase_timestamp
+  grain: day
+  valid_statuses: [delivered, shipped, invoiced, processing, approved]
+  rationale: >
+    Gelir yalnızca ürün bedelidir; freight_value kargo maliyetinin karşılığı
+    olduğu için hariç tutulur, aksi halde kargo fiyat değişimleri satış
+    anomalisi gibi görünürdü. canceled ve unavailable satışa dönüşmediği için
+    dışarıda bırakılır. processing ve approved siparişlerde ödeme onaylandığı
+    için dahil edilir; sonradan iptal olabilecekleri bilinen bir risktir.
