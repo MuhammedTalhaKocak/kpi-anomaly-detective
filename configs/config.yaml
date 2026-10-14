@@ -1,3 +1,15 @@
 data:
   start_date: "2017-01-11"
   end_date: "2018-08-21"
+
+detection:
+  z_threshold: 3
+  rolling_window: 28
+
+paths:
+  orders: data/raw/olist_orders_dataset.csv
+  order_items: data/raw/olist_order_items_dataset.csv
+  daily_revenue: data/processed/daily_revenue.csv
+  detection_results: data/processed/detection_results.csv
+
+valid_statuses: [delivered, shipped, invoiced, processing, approved]
