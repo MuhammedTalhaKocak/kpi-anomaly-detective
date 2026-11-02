@@ -2,6 +2,7 @@ import yaml
 from src.ingestion.ingestion import load_orders
 from src.features.features import build_daily_revenue
 from src.detection.detection import detect_anomalies
+from src.reporting.report import add_deviation, plot_revenue, write_report
 
 
 def main():
@@ -16,6 +17,15 @@ def main():
     window = config["detection"]["rolling_window"]
     threshold = config["detection"]["z_threshold"]
     result = detect_anomalies(daily, window, threshold)
+    result_deviation = add_deviation(results=result)
+    plot_revenue(results=result_deviation, output_path=config["paths"]["report_chart"])
+    write_report(
+        results=result_deviation,
+        chart_path=config["paths"]["report_chart"],
+        output_path=config["paths"]["report"],
+        window=config["detection"]["rolling_window"],
+        threshold=config["detection"]["z_threshold"],
+    )
     result.to_csv(path_or_buf=config["paths"]["detection_results"], index=False)
     print(f"{len(result)} gün işlendi, {result['is_anomaly'].sum()} anomali bulundu.")
 

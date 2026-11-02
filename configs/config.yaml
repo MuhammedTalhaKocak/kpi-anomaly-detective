@@ -11,3 +11,5 @@ paths:
   order_items: data/raw/olist_order_items_dataset.csv
   daily_revenue: data/processed/daily_revenue.csv
   detection_results: data/processed/detection_results.csv
+  report_chart: reports/revenue_chart.png
+  report: reports/daily_report.md
